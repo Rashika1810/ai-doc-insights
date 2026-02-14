@@ -1,6 +1,10 @@
-const express=require('express');
-const { default: connectDB } = require('./config/db');
-require('dotenv').config();
+import express from 'express'
+import connectDB from "./config/db.js"
+import dotenv from "dotenv";
+import documentRoutes from "./routes/documentRoutes.js";
+
+
+dotenv.config();
 
 const app=express();
 
@@ -8,6 +12,8 @@ const app=express();
 connectDB();
 
 app.use(express.json());
+
+app.use("/api/documents",documentRoutes)
 
 app.get("/",(req,resp)=>{
     resp.send("API is running");
